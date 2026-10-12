@@ -43,19 +43,11 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
     <td valign="top">Internal service account. Runs the Compass data pipelines.</td>
     <td valign="top">
       <ul>
+        <li>Editor</li>
         <li>BigQuery Admin</li>
-        <li>BigQuery Job User</li>
         <li>Storage Object Admin</li>
-        <li>Artifact Registry Reader</li>
-        <li>Cloud Run Developer</li>
-        <li>Workflows Invoker</li>
-        <li>Logs Viewer</li>
         <li>Private Logs Viewer</li>
-        <li>Gemini Data Analytics Data Agent Editor</li>
-        <li>Gemini Data Analytics Data Agent Creator</li>
-        <li>Dataform Admin</li>
-        <li>API Keys Admin</li>
-        <li>Secret Manager Admin</li>
+        <li>Secret Manager Secret Accessor</li>
       </ul>
     </td>
   </tr>

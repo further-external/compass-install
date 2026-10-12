@@ -18,19 +18,11 @@ COMPASS_WRITE_SA="compass-write@${COMPASS_PROJECT}.iam.gserviceaccount.com"
 COMPASS_INFRASTRUCTURE_SA="compass-infrastructure@${COMPASS_PROJECT}.iam.gserviceaccount.com"
 
 COMPASS_DATA_ROLES=(
+	roles/editor
 	roles/bigquery.admin
-	roles/bigquery.jobUser
 	roles/storage.objectAdmin
-	roles/artifactregistry.reader
-	roles/run.developer
-	roles/workflows.invoker
-	roles/logging.viewer
 	roles/logging.privateLogViewer
-	roles/geminidataanalytics.dataAgentEditor
-	roles/geminidataanalytics.dataAgentCreator
-	roles/dataform.admin
-	roles/serviceusage.apiKeysAdmin
-	roles/secretmanager.admin
+	roles/secretmanager.secretAccessor
 )
 
 COMPASS_READ_ROLES=(
