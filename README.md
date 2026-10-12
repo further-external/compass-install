@@ -2,11 +2,11 @@
 
 Grants the Google Cloud IAM roles that Compass needs in your GCP project.
 
-## Before you start
+### Before you start
 
-- You need the **Owner** role on the GCP project you are connecting to Compass.
+You need the **Owner** role on the GCP project you are connecting to Compass.
 
-## Run it
+### Run it
 
 1. In the [Google Cloud console](https://console.cloud.google.com/), select your project in the project picker at the top of the page.
 2. Open Cloud Shell with the **Activate Cloud Shell** button (`>_`) in the top bar.
@@ -20,7 +20,7 @@ Grants the Google Cloud IAM roles that Compass needs in your GCP project.
 
 It takes about 2 minutes. When it finishes you'll see `Done.` message.
 
-## What it does
+### What it does
 
 1. Enables the IAM API in your project.
 2. Creates internal `compass-data` service account in your project which will be used to run the data pipelines.
@@ -34,11 +34,11 @@ It takes about 2 minutes. When it finishes you'll see `Done.` message.
 | `compass-infrastructure@` | Editor, Storage Admin, BigQuery Admin, Secret Manager Secret Accessor |
 
 
-## Check the result
+### Check the result
 
-List every role the Compass service accounts have on your project:
+List Compass service accounts that have access to your project:
 
 ```bash
-gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten='bindings[].members' --filter='bindings.members~"^serviceAccount:compass-(data|read|write|infrastructure)@"' --sort-by='bindings.members,bindings.role' --format='table(bindings.members.sub("serviceAccount:",""):label=SERVICE_ACCOUNT, bindings.role:label=ROLE)'
+gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten='bindings[].members' --filter='bindings.members~"^serviceAccount:compass-"' --format='value(bindings.members.sub("serviceAccount:",""))' | sort -u
 ```
 
