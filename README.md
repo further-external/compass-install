@@ -20,6 +20,14 @@ You need the **Owner** role on the GCP project you are connecting to Compass.
 
 It takes about 2 minutes. When it finishes you'll see `Done.` message.
 
+### Check the result
+
+List Compass service accounts that have access to your project:
+
+```bash
+gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten='bindings[].members' --filter='bindings.members~"^serviceAccount:compass-"' --format='value(bindings.members.sub("serviceAccount:",""))' | sort -u
+```
+
 ### What it does
 
 Enables the IAM API and grants IAM roles to Compass service accounts:
@@ -89,12 +97,4 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
     </td>
   </tr>
 </table>
-
-### Check the result
-
-List Compass service accounts that have access to your project:
-
-```bash
-gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten='bindings[].members' --filter='bindings.members~"^serviceAccount:compass-"' --format='value(bindings.members.sub("serviceAccount:",""))' | sort -u
-```
 
