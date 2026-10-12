@@ -5,20 +5,32 @@ Grants the Google Cloud IAM roles that Compass needs in your GCP project.
 ## Before you start
 
 - You need the **Owner** role on the GCP project you are connecting to Compass.
-- Have your **project ID** ready (for example `my-company-compass`). You can find it on the [Google Cloud console dashboard](https://console.cloud.google.com/home/dashboard).
 
 ## Run it
 
-1. Open [Cloud Shell](https://shell.cloud.google.com/?show=terminal). It's already signed in as you.
-2. Paste this command, replacing `<PROJECT_ID>` with your project ID:
+1. In the [Google Cloud console](https://console.cloud.google.com/), select your project in the project picker at the top of the page.
+2. Open Cloud Shell with the **Activate Cloud Shell** button (`>_`) in the top bar. It's already signed in as you, with your project selected.
+3. Paste this command:
 
    ```bash
-   git clone https://github.com/further-external/compass-install.git && bash compass-install/grant-compass-roles/grant_compass_roles.sh <PROJECT_ID>
+   git clone https://github.com/further-external/compass-install.git && bash compass-install/grant-compass-roles/grant_compass_roles.sh
    ```
 
-3. Check the signed-in account and project the script prints, then type `y` to continue.
+4. Check the signed-in account and project the script prints, then type `y` to continue.
 
-It takes about 2 minutes. When it finishes you'll see `Done. Compass roles are granted in <PROJECT_ID>.`
+It takes about 2 minutes. When it finishes you'll see `Done. Compass roles are granted in <your project>.`
+
+The script uses the project selected in Cloud Shell (`$GOOGLE_CLOUD_PROJECT`). To use a different project, add its ID to the end of the command:
+
+```bash
+git clone https://github.com/further-external/compass-install.git && bash compass-install/grant-compass-roles/grant_compass_roles.sh <PROJECT_ID>
+```
+
+To list the project IDs you can access:
+
+```bash
+gcloud projects list --format="table(projectId, name)"
+```
 
 ## What it does
 
@@ -42,7 +54,7 @@ The full role IDs are listed at the top of [`grant-compass-roles/grant_compass_r
 List every role the Compass service accounts have on your project:
 
 ```bash
-gcloud projects get-iam-policy <PROJECT_ID> --flatten="bindings[].members" --filter="bindings.members~compass-" --format="table(bindings.members, bindings.role)"
+gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten="bindings[].members" --filter="bindings.members~compass-" --format="table(bindings.members, bindings.role)"
 ```
 
 ## Troubleshooting
@@ -50,9 +62,11 @@ gcloud projects get-iam-policy <PROJECT_ID> --flatten="bindings[].members" --fil
 **`destination path 'compass-install' already exists`**: you ran the command before in this Cloud Shell. Get the latest version and run the script again:
 
 ```bash
-git -C compass-install pull && bash compass-install/grant-compass-roles/grant_compass_roles.sh <PROJECT_ID>
+git -C compass-install pull && bash compass-install/grant-compass-roles/grant_compass_roles.sh
 ```
 
-**`Project '<PROJECT_ID>' not found, or ... cannot access it`**: check the project ID, and that the account shown in Cloud Shell is an Owner of that project.
+**`No project selected in Cloud Shell`**: select your project in the console's project picker and reopen Cloud Shell, or add the project ID to the end of the command.
+
+**`Project '...' not found, or ... cannot access it`**: check the project ID, and that the account shown in Cloud Shell is an Owner of that project.
 
 **`FAILED ... PERMISSION_DENIED`**: the signed-in account is not an Owner of the project. Ask a project Owner to run the script.

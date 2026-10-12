@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Grants the IAM roles Compass needs in a client GCP project.
-# Usage: bash grant_compass_roles.sh <PROJECT_ID>
+# Usage: bash grant_compass_roles.sh [PROJECT_ID]
+# Defaults to the project selected in Cloud Shell ($GOOGLE_CLOUD_PROJECT).
 set -euo pipefail
 
-PROJECT_ID="${1:-}"
+PROJECT_ID="${1:-${GOOGLE_CLOUD_PROJECT:-}}"
 if [[ -z "$PROJECT_ID" ]]; then
-	echo "Usage: bash grant_compass_roles.sh <PROJECT_ID>" >&2
+	echo "No project selected in Cloud Shell. Pass the project ID instead:" >&2
+	echo "  bash grant_compass_roles.sh <PROJECT_ID>" >&2
 	exit 1
 fi
 
