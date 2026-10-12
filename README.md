@@ -13,20 +13,12 @@ You need the **Owner** role on the GCP project you are connecting to Compass.
 3. Paste this command:
 
    ```bash
-   git clone https://github.com/further-external/compass-install.git && bash compass-install/grant_compass_roles.sh
+   rm -rf compass-install; git clone https://github.com/further-external/compass-install.git && bash compass-install/grant_compass_roles.sh
    ```
 
 4. Check the project id and type `y` to continue.
 
 It takes about 2 minutes. When it finishes you'll see `Done.` message.
-
-### Check the result
-
-List Compass service accounts that have access to your project:
-
-```bash
-gcloud projects get-iam-policy "$GOOGLE_CLOUD_PROJECT" --flatten='bindings[].members' --filter='bindings.members~"^serviceAccount:compass-"' --format='value(bindings.members.sub("serviceAccount:",""))' | sort -u
-```
 
 ### What it does
 
@@ -67,7 +59,7 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
   </tr>
   <tr>
     <td valign="top"><code>compass-write@</code></td>
-    <td valign="top">Used by the Compass app to save data to BigQuery and Cloud Storage in your project.</td>
+    <td valign="top">Used by the Compass web app to save data to BigQuery and Cloud Storage in your project.</td>
     <td valign="top">
       <ul>
         <li>Storage Admin</li>
@@ -78,7 +70,7 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
   </tr>
   <tr>
     <td valign="top"><code>compass-infrastructure@</code></td>
-    <td valign="top">Creates and maintains the Compass resources in the project.</td>
+    <td valign="top">Creates and maintains the Compass resources in your project.</td>
     <td valign="top">
       <ul>
         <li>Editor</li>
