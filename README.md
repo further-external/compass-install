@@ -24,75 +24,12 @@ It takes about 2 minutes. When it finishes you'll see `Done.` message.
 
 Enables the IAM API and grants IAM roles to Compass service accounts:
 
-<table>
-  <thead>
-    <tr>
-      <th>Service account</th>
-      <th>What it does</th>
-      <th>Roles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td valign="top"><code>compass-data@</code></td>
-      <td valign="top">Created in your project. Runs the Compass data pipelines: Cloud Run jobs (data connectors, dbt, ML models) and the Workflows that schedule them.</td>
-      <td valign="top">
-        <ul>
-          <li>BigQuery Admin</li>
-          <li>BigQuery Job User</li>
-          <li>Storage Object Admin</li>
-          <li>Artifact Registry Reader</li>
-          <li>Cloud Run Developer</li>
-          <li>Workflows Invoker</li>
-          <li>Logs Viewer</li>
-          <li>Private Logs Viewer</li>
-          <li>Gemini Data Analytics Data Agent Editor</li>
-          <li>Gemini Data Analytics Data Agent Creator</li>
-          <li>Dataform Admin</li>
-          <li>API Keys Admin</li>
-          <li>Secret Manager Admin</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top"><code>compass-read@</code></td>
-      <td valign="top">Used by the Compass app to read your data for dashboards and AI features (data agents, Gemini, Model Armor safety checks).</td>
-      <td valign="top">
-        <ul>
-          <li>BigQuery Data Viewer</li>
-          <li>BigQuery Job User</li>
-          <li>Gemini Data Analytics Data Agent User</li>
-          <li>Gemini for Google Cloud User</li>
-          <li>Agent Platform User</li>
-          <li>Model Armor User</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top"><code>compass-write@</code></td>
-      <td valign="top">Used by the Compass app to save data to BigQuery and Cloud Storage in your project.</td>
-      <td valign="top">
-        <ul>
-          <li>Storage Admin</li>
-          <li>BigQuery Data Editor</li>
-          <li>BigQuery Job User</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top"><code>compass-infrastructure@</code></td>
-      <td valign="top">Creates and maintains the Compass resources in your project: BigQuery datasets, Cloud Storage buckets, Cloud Run jobs, Workflows, schedules, API keys, secrets and alerts.</td>
-      <td valign="top">
-        <ul>
-          <li>Editor</li>
-          <li>Storage Admin</li>
-          <li>BigQuery Admin</li>
-          <li>Secret Manager Secret Accessor</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Service account | What it does | Roles |
+|---|---|---|
+| `compass-data@` | Created in your project. Runs the Compass data pipelines: Cloud Run jobs (data connectors, dbt, ML models) and the Workflows that schedule them. | • BigQuery Admin<br>• BigQuery Job User<br>• Storage Object Admin<br>• Artifact Registry Reader<br>• Cloud Run Developer<br>• Workflows Invoker<br>• Logs Viewer<br>• Private Logs Viewer<br>• Gemini Data Analytics Data Agent Editor<br>• Gemini Data Analytics Data Agent Creator<br>• Dataform Admin<br>• API Keys Admin<br>• Secret Manager Admin |
+| `compass-read@` | Used by the Compass app to read your data for dashboards and AI features (data agents, Gemini, Model Armor safety checks). | • BigQuery Data Viewer<br>• BigQuery Job User<br>• Gemini Data Analytics Data Agent User<br>• Gemini for Google Cloud User<br>• Agent Platform User<br>• Model Armor User |
+| `compass-write@` | Used by the Compass app to save data to BigQuery and Cloud Storage in your project. | • Storage Admin<br>• BigQuery Data Editor<br>• BigQuery Job User |
+| `compass-infrastructure@` | Creates and maintains the Compass resources in your project: BigQuery datasets, Cloud Storage buckets, Cloud Run jobs, Workflows, schedules, API keys, secrets and alerts. | • Editor<br>• Storage Admin<br>• BigQuery Admin<br>• Secret Manager Secret Accessor |
 
 ### Check the result
 
