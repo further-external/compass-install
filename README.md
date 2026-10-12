@@ -13,7 +13,9 @@ You need the **Owner** role on the GCP project you are connecting to Compass.
 3. Paste this command:
 
    ```bash
-   rm -rf compass-install; git clone https://github.com/further-external/compass-install.git && bash compass-install/grant_compass_roles.sh
+   rm -rf compass-install; \
+   git clone https://github.com/further-external/compass-install.git && \
+   bash compass-install/grant_compass_roles.sh
    ```
 
 4. Check the project id and type `y` to continue.
