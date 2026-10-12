@@ -91,10 +91,10 @@ Project:      ${PROJECT_ID}
 This will:
   - enable the IAM API
   - create service account ${COMPASS_DATA_SA} (if missing)
-  - grant ${#COMPASS_DATA_ROLES[@]} roles to ${COMPASS_DATA_SA}
   - grant ${#COMPASS_READ_ROLES[@]} roles to ${COMPASS_READ_SA}
   - grant ${#COMPASS_WRITE_ROLES[@]} roles to ${COMPASS_WRITE_SA}
   - grant ${#COMPASS_INFRASTRUCTURE_ROLES[@]} roles to ${COMPASS_INFRASTRUCTURE_SA}
+  - grant ${#COMPASS_DATA_ROLES[@]} roles to ${COMPASS_DATA_SA}
 
 EOF
 read -r -p "Continue? [y/N] " answer
@@ -117,9 +117,6 @@ else
 fi
 
 echo
-echo "compass-data:"
-grant_roles "$COMPASS_DATA_SA" "${COMPASS_DATA_ROLES[@]}"
-
 echo "compass-read:"
 grant_roles "$COMPASS_READ_SA" "${COMPASS_READ_ROLES[@]}"
 
@@ -128,6 +125,10 @@ grant_roles "$COMPASS_WRITE_SA" "${COMPASS_WRITE_ROLES[@]}"
 
 echo "compass-infrastructure:"
 grant_roles "$COMPASS_INFRASTRUCTURE_SA" "${COMPASS_INFRASTRUCTURE_ROLES[@]}"
+
+# Last, so the new compass-data service account has time to propagate
+echo "compass-data:"
+grant_roles "$COMPASS_DATA_SA" "${COMPASS_DATA_ROLES[@]}"
 
 echo
 echo "Done. Compass roles are granted in ${PROJECT_ID}."
