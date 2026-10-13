@@ -1,10 +1,10 @@
 # Compass Install
 
-Grants the Google Cloud IAM roles that Compass needs in your GCP project.
+Sets up your GCP project for Compass data warehouse.
 
 ### Before you start
 
-You need the **Owner** role on the GCP project you are connecting to Compass.
+You need the **Owner** role on the GCP project you are connecting to Compass, and the project must be linked to a billing account.
 
 ### Run it
 
@@ -18,13 +18,16 @@ You need the **Owner** role on the GCP project you are connecting to Compass.
    bash compass-install/grant_compass_roles.sh
    ```
 
-4. Check the project id and type `y` to continue.
+4. Follow instructions in the console.
 
-It takes about 2 minutes. When it finishes you'll see `Done.` message.
+It takes about 5 minutes. When it finishes you'll see `Done.` message.
 
 ### What it does
 
-Enables the IAM API and grants IAM roles to Compass service accounts:
+1. Enables the Google Cloud APIs Compass uses.
+2. Creates internal `compass-data` service account.
+3. Creates the Docker repository in Artifact Registry for the Compass pipeline images.
+4. Grants IAM roles to the Compass service accounts:
 
 <table>
   <tr>
@@ -34,7 +37,7 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
   </tr>
   <tr>
     <td valign="top"><code>compass-data@</code></td>
-    <td valign="top">Internal service account. Runs the Compass data pipelines.</td>
+    <td valign="top">Internal service account. Runs the Compass data pipelines from Artifact Registry.</td>
     <td valign="top">
       <ul>
         <li>Editor</li>
