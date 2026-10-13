@@ -60,6 +60,8 @@ COMPASS_DATA_ROLES=(
 COMPASS_READ_ROLES=(
 	roles/bigquery.dataViewer
 	roles/bigquery.jobUser
+	roles/storage.objectViewer
+	roles/storage.bucketViewer
 	roles/geminidataanalytics.dataAgentUser
 	roles/cloudaicompanion.user
 	roles/aiplatform.user

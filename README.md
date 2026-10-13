@@ -67,6 +67,8 @@ It takes about 5 minutes. When it finishes you'll see `Done.` message.
       <ul>
         <li>BigQuery Data Viewer</li>
         <li>BigQuery Job User</li>
+        <li>Storage Object Viewer</li>
+        <li>Storage Bucket Viewer</li>
         <li>Gemini Data Analytics Data Agent User</li>
         <li>Gemini for Google Cloud User</li>
         <li>Agent Platform User</li>
