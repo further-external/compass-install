@@ -40,7 +40,19 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
         <li>Editor</li>
         <li>BigQuery Admin</li>
         <li>Storage Object Admin</li>
+        <li>Secret Manager Secret Accessor</li>
         <li>Private Logs Viewer</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><code>compass-infrastructure@</code></td>
+    <td valign="top">Creates and maintains the Compass resources in your project.</td>
+    <td valign="top">
+      <ul>
+        <li>Editor</li>
+        <li>BigQuery Admin</li>
+        <li>Storage Admin</li>
         <li>Secret Manager Secret Accessor</li>
       </ul>
     </td>
@@ -64,21 +76,9 @@ Enables the IAM API and grants IAM roles to Compass service accounts:
     <td valign="top">Used by the Compass web app to save data to BigQuery and Cloud Storage in your project.</td>
     <td valign="top">
       <ul>
-        <li>Storage Admin</li>
         <li>BigQuery Data Editor</li>
         <li>BigQuery Job User</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top"><code>compass-infrastructure@</code></td>
-    <td valign="top">Creates and maintains the Compass resources in your project.</td>
-    <td valign="top">
-      <ul>
-        <li>Editor</li>
         <li>Storage Admin</li>
-        <li>BigQuery Admin</li>
-        <li>Secret Manager Secret Accessor</li>
       </ul>
     </td>
   </tr>
