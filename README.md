@@ -27,7 +27,8 @@ It takes about 5 minutes. When it finishes you'll see `Done.` message.
 1. Enables the Google Cloud APIs Compass uses.
 2. Creates internal `compass-data` service account.
 3. Creates the Docker repository in Artifact Registry for the Compass pipeline images.
-4. Grants IAM roles to the Compass service accounts:
+4. Creates the Cloud Storage bucket for the Compass Terraform state.
+5. Grants IAM roles to the Compass service accounts:
 
 <table>
   <tr>

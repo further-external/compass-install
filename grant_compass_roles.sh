@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Sets up a client GCP project for Compass: APIs, Artifact Registry and IAM roles.
+# Sets up a client GCP project for Compass: APIs, Artifact Registry, Terraform state bucket and IAM roles.
 # Usage: bash grant_compass_roles.sh [PROJECT_ID]
 # Defaults to the project selected in Cloud Shell ($GOOGLE_CLOUD_PROJECT).
 # Asks for the region (us-central1 or europe-west4); skip the question with COMPASS_REGION=<region>.
@@ -14,6 +14,7 @@ fi
 
 COMPASS_PROJECT="pegasus-prod-448021"
 ARTIFACT_REPOSITORY="pegasus-modules"
+TERRAFORM_STATE_BUCKET="gs://${PROJECT_ID}-terraform-state"
 COMPASS_DATA_SA="compass-data@${PROJECT_ID}.iam.gserviceaccount.com"
 COMPASS_READ_SA="compass-read@${COMPASS_PROJECT}.iam.gserviceaccount.com"
 COMPASS_WRITE_SA="compass-write@${COMPASS_PROJECT}.iam.gserviceaccount.com"
@@ -142,6 +143,7 @@ This will:
   - enable ${#REQUIRED_APIS[@]} APIs
   - create service account ${COMPASS_DATA_SA} (if missing)
   - create Artifact Registry repository ${ARTIFACT_REPOSITORY} in ${COMPASS_REGION} (if missing)
+  - create Terraform state bucket ${TERRAFORM_STATE_BUCKET} in ${COMPASS_REGION} (if missing)
   - grant ${#COMPASS_READ_ROLES[@]} roles to ${COMPASS_READ_SA}
   - grant ${#COMPASS_WRITE_ROLES[@]} roles to ${COMPASS_WRITE_SA}
   - grant ${#COMPASS_INFRASTRUCTURE_ROLES[@]} roles to ${COMPASS_INFRASTRUCTURE_SA}
@@ -179,6 +181,19 @@ else
 		--location="$COMPASS_REGION" \
 		--repository-format=docker \
 		--description="Container images for Pegasus Cloud Run jobs and services"
+fi
+
+if gcloud storage buckets describe "$TERRAFORM_STATE_BUCKET" --project="$PROJECT_ID" >/dev/null 2>&1; then
+	echo "Terraform state bucket ${TERRAFORM_STATE_BUCKET} already exists."
+else
+	echo "Creating Terraform state bucket ${TERRAFORM_STATE_BUCKET} in ${COMPASS_REGION}..."
+	gcloud storage buckets create "$TERRAFORM_STATE_BUCKET" \
+		--project="$PROJECT_ID" \
+		--location="$COMPASS_REGION" \
+		--uniform-bucket-level-access \
+		--public-access-prevention
+	# Keep previous state versions so a bad apply can be rolled back
+	gcloud storage buckets update "$TERRAFORM_STATE_BUCKET" --versioning
 fi
 
 echo
