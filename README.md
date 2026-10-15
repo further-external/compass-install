@@ -84,6 +84,7 @@ It takes about 5 minutes. When it finishes you'll see `Done.` message.
       <ul>
         <li>BigQuery Data Editor</li>
         <li>BigQuery Job User</li>
+        <li>Agent Platform User</li>
         <li>Storage Admin</li>
       </ul>
     </td>

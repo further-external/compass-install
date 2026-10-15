@@ -36,6 +36,7 @@ REQUIRED_APIS=(
 	youtube.googleapis.com
 	cloudscheduler.googleapis.com
 	logging.googleapis.com
+	clouderrorreporting.googleapis.com
 	monitoring.googleapis.com
 	run.googleapis.com
 	workflows.googleapis.com
@@ -73,6 +74,7 @@ COMPASS_WRITE_ROLES=(
 	roles/storage.admin
 	roles/bigquery.dataEditor
 	roles/bigquery.jobUser
+	roles/aiplatform.user
 )
 
 COMPASS_INFRASTRUCTURE_ROLES=(
